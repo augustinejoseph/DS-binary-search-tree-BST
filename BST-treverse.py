@@ -4,6 +4,16 @@ class Node():
         self.right = None
         self.data = data
 
+def insert(node, value):
+    if node is None:
+        return Node(value)
+    if value < node.data:
+        node.left = insert(node.left, value)
+    else:
+        if value > node.data:
+            node.right = insert(node.right, value)
+    return node
+
 def inOrderTraverse(node):
     if node is not None:
         inOrderTraverse(node.left)
@@ -23,12 +33,13 @@ def postOrderTraversal(node):
         print(node.data)
 
 node = Node(5)
-node.left = Node(3)
-node.right = Node(7)
-node.left.left = Node(2)
-node.left.right = Node(4)
-node.right.left = Node(6)
-node.right.right = Node(8)
+insert(node, 3)
+insert(node, 7)
+insert(node, 2)
+insert(node, 4)
+insert(node, 6)
+insert(node, 8)
+
 
 print("Inorder Traversal")
 inOrderTraverse(node)

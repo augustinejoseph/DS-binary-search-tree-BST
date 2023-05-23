@@ -1,26 +1,34 @@
-class Node():
+class Node:
     def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
 
+def insert(node, value):
+    if node is None:
+        return Node(value)
+    if value == node.data:
+        print("value alredy exists")
+        return
+    elif value < node.data:
+        node.left = insert(node.left, value)
+    else:
+        if value > node.data:
+            node.right = insert(node.right, value)
+    return node
+    
+def printNode(node):
+    if node is not None:
+        printNode(node.left)
+        print(node.data)
+        printNode(node.right)
 
+node = Node(5)
+insert(node, 3)
+insert(node, 7)
+insert(node, 2)
+insert(node, 4)
+insert(node, 6)
+insert(node, 8)
 
-def printBst(tree):
-    if tree is not None:
-        printBst(tree.left)
-        print(tree.data)
-        printBst(tree.right)
-
-# Creating the BST
-tree = Node(5)
-tree.left = Node(3)
-tree.right = Node(7)
-tree.left.left = Node(2)
-tree.left.right = Node(4)
-tree.right.left = Node(6)
-tree.right.right = Node(8)
-
-# Printing the BST
-print("Binary Search Tree:")
-printBst(tree)
+printNode(node)
