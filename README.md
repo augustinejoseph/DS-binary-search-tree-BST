@@ -214,3 +214,21 @@ printNode(node)
 <br>
 
 ## Deleting Node from BST
+1. ### Case 1: Deleting a Leaf Node
+
+- If the node to be deleted is a leaf node (i.e., it has no children), we can simply remove the node from the tree.
+
+2. ### Case 2: Deleting a Node with a Single Child
+
+- If the node to be deleted has only one child, we can replace the node with its child. The child node is connected to the parent of the node to be deleted.
+
+3. ### Case 3: Deleting a Node with Two Children
+
+- If the node to be deleted has two children, we need to find its successor or predecessor node.
+- The successor node is the smallest node in the right subtree of the node to be deleted.
+- The predecessor node is the largest node in the left subtree of the node to be deleted.
+- We can replace the node to be deleted with its successor or predecessor node and recursively delete the successor or predecessor node from its original position.
+
+```python
+
+```
