@@ -230,5 +230,38 @@ printNode(node)
 - We can replace the node to be deleted with its successor or predecessor node and recursively delete the successor or predecessor node from its original position.
 
 ```python
+def delete(node, value):
+    if node is None:
+        return node
+    if value < node.data:
+        node.left = delete(node.left, value)
+    elif value > node.data:
+        node.right = delete(node.right, value)
+    else:
+        # if node is a leaf node
+        if node.left is None and node.right is None:
+            node = None
+        # if root has one left child
+        elif node.left is None:
+            node = node.right
+        # if node has one right child
+        elif node.right is None:
+            node = node.left
+        # if node has both left and right child
+        else:
+            successor = findSuccessor(node.right)
+            node.data = successor.data
+            node.right = delete(node.right, successor.data)
+    return node
 
 ```
+1. The function takes a node and a value to be deleted from the binary search tree.
+2. The base case is checked first: if the node is None, indicating an empty subtree, it is returned as is.
+3. If the value is less than the node.data, the function recursively calls delete on the left subtree, updating the left child accordingly.
+4. If the value is greater than the node.data, the function recursively calls delete on the right subtree, updating the right child accordingly.
+5. If the value is equal to the node.data, indicating the node to be deleted, the following cases are considered:
+    * If the node is a leaf node (i.e., it has no left or right child), it is simply set to None.
+    * If the node has only a left child, the node is replaced by its left child.
+    * If the node has only a right child, the node is replaced by its right child.
+    * If the node has both a left and right child, the successor is found by locating the inorder successor in the right subtree. The **node.data** is updated with the successor's data, and the successor node is deleted from the right subtree recursively.
+6. Finally, the modified node is returned.
